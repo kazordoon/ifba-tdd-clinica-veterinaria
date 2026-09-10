@@ -24,4 +24,15 @@ describe('Animal', () => {
 
     expect(animal.totalSpent).toBe(expectedTotalSpent);
   });
+
+  it('Deve adicionar os atendimentos no histórico do animal', () => {
+    const animal = new Animal('Luck', 'Cachorro', 5);
+
+    const appointment = new VetAppointment();
+    appointment.appointmentType = appointment.appointmentTypes.ROTINA;
+
+    animal.addAppointment(appointment);
+
+    expect(animal.appointments).toEqual(expect.arrayContaining([appointment]));
+  })
 });

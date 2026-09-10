@@ -15,7 +15,12 @@ module.exports = class Animal {
     return this.#totalSpent;
   }
 
+  get appointments() {
+    return this.#appointments;
+  }
+
   addAppointment(appointment) {
+    this.#appointments.push(appointment);
     this.#totalSpent += appointment.totalValue;
   }
 };
