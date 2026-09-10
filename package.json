@@ -1,0 +1,26 @@
+{
+  "name": "ifba-tdd-vet-clinic",
+  "version": "1.0.0",
+  "description": "Veterinary clinic",
+  "keywords": [
+    "tdd"
+  ],
+  "homepage": "https://github.com/kazordoon/ifba-tdd-clinica-veterinaria#readme",
+  "bugs": {
+    "url": "https://github.com/kazordoon/ifba-tdd-clinica-veterinaria/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kazordoon/ifba-tdd-clinica-veterinaria.git"
+  },
+  "license": "MIT",
+  "author": "Felipe Barros <felipetech@tuta.io>",
+  "type": "commonjs",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest --collect-coverage"
+  },
+  "devDependencies": {
+    "jest": "^30.5.1"
+  }
+}
