@@ -20,6 +20,10 @@ module.exports = class Animal {
   }
 
   addAppointment(appointment) {
+    if (this.#appointments.length >= 5) {
+      appointment.applyLoyaltyDiscount();
+    }
+
     this.#appointments.push(appointment);
     this.#totalSpent += appointment.totalValue;
   }

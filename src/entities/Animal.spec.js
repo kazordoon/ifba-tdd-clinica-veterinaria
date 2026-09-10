@@ -35,4 +35,41 @@ describe('Animal', () => {
 
     expect(animal.appointments).toEqual(expect.arrayContaining([appointment]));
   })
+
+    it('Deve adicionar 10% de desconto caso o animal tenha pelo menos 5 atendimentos anteriores', () => {
+    const animal = new Animal('Luck', 'Cachorro', 5);
+    const appointment = new VetAppointment();
+    appointment.appointmentType = appointment.appointmentTypes.ROTINA;
+
+    animal.addAppointment(appointment);
+    animal.addAppointment(appointment);
+    animal.addAppointment(appointment);
+    animal.addAppointment(appointment);
+    animal.addAppointment(appointment);
+
+    const sixthAppointment = new VetAppointment()
+    sixthAppointment.appointmentType = appointment.appointmentTypes.ROTINA;
+    animal.addAppointment(sixthAppointment);
+
+    const expectedValueWithDiscount = appointment.appointmentTypes.ROTINA.price * 0.9;
+
+    expect(sixthAppointment.totalValue).toBe(expectedValueWithDiscount);
+  });
+
+    it('Não deve adicionar 10% de desconto caso o animal tenha menos que 5 atendimentos anteriores', () => {
+    const animal = new Animal('Luck', 'Cachorro', 5);
+    const appointment = new VetAppointment();
+    appointment.appointmentType = appointment.appointmentTypes.ROTINA;
+
+    animal.addAppointment(appointment);
+    animal.addAppointment(appointment);
+    animal.addAppointment(appointment);
+    animal.addAppointment(appointment);
+
+    const fifthAppointment = new VetAppointment()
+    fifthAppointment.appointmentType = appointment.appointmentTypes.ROTINA;
+    animal.addAppointment(fifthAppointment);
+
+    expect(fifthAppointment.totalValue).toBe(appointment.appointmentTypes.ROTINA.price);
+  });
 });

@@ -1,3 +1,4 @@
+const Animal = require('../entities/Animal');
 const VetAppointment = require('./VetAppointment');
 
 describe('VetAppointment', () => {
@@ -23,6 +24,31 @@ describe('VetAppointment', () => {
     const appointment = new VetAppointment();
 
     appointment.appointmentType = appointment.appointmentTypes.ROTINA;
-    expect(appointment.totalValue).toBe(appointment.appointmentTypes.ROTINA.price);
+    expect(appointment.totalValue).toBe(
+      appointment.appointmentTypes.ROTINA.price
+    );
+  });
+
+  it('Deve aplicar 10% de desconto de fidelidade', () => {
+    const appointment = new VetAppointment();
+    appointment.appointmentType = appointment.appointmentTypes.ROTINA;
+
+    appointment.applyLoyaltyDiscount();
+
+    const expectedValueWithDiscount =
+      appointment.appointmentTypes.ROTINA.price * 0.9;
+    expect(appointment.totalValue).toBe(90);
+  });
+
+  it('Não deve aplicar desconto mais de uma vez', () => {
+    const appointment = new VetAppointment();
+    appointment.appointmentType = appointment.appointmentTypes.ROTINA;
+
+    const errorMessage = 'Discount already applied.';
+
+    expect(() => {
+      appointment.applyLoyaltyDiscount();
+      appointment.applyLoyaltyDiscount();
+    }).toThrow(errorMessage);
   });
 });
