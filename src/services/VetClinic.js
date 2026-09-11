@@ -14,6 +14,10 @@ module.exports = class VetClinic {
     this.animals.push(animal);
   }
 
+  addAnimals(animals) {
+    animals.forEach((animal) => this.addAnimal(animal));
+  }
+
   findAnimalByID(animalID) {
     const foundAnimal = this.#animals.find((animal) => animal.id === animalID);
 

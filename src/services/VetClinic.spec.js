@@ -10,7 +10,7 @@ describe('VetClinic', () => {
     vetClinic.addAnimal(animal);
 
     expect(vetClinic.animals).toEqual(expect.arrayContaining([animal]));
-  })
+  });
 
   it('Deve gerar um erro ao tentar adicionar um animal que já tenha sido adicionado anteriormente', () => {
     const vetClinic = new VetClinic();
@@ -22,6 +22,19 @@ describe('VetClinic', () => {
 
     expect(() => vetClinic.addAnimal(animal)).toThrow(errorMessage);
   });
+
+    it('Deve adicionar uma lista de animais com sucesso', () => {
+    const vetClinic = new VetClinic();
+    const animal1 = new Animal('Luck', 'Cachorro', 5);
+    const animal2 = new Animal('Mingau', 'Gato', 7);
+    const animal3 = new Animal('Crusoé', 'Lagarto', 1);
+
+    const animals = [animal1, animal2, animal3];
+
+    vetClinic.addAnimals(animals);
+
+    expect(vetClinic.animals).toEqual(expect.arrayContaining(animals));
+  })
 
   it('Deve consultar um animal existente com sucesso', () => {
     const vetClinic = new VetClinic();
@@ -42,6 +55,8 @@ describe('VetClinic', () => {
 
     const errorMessage = 'Animal not found.';
 
-    expect(() => vetClinic.findAnimalByID('id-nao-existente')).toThrow(errorMessage);
+    expect(() => vetClinic.findAnimalByID('id-nao-existente')).toThrow(
+      errorMessage
+    );
   });
 });
