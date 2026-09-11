@@ -25,4 +25,8 @@ module.exports = class VetClinic {
 
     return foundAnimal;
   }
+
+  calculateTotalSpent() {
+    return this.#animals.reduce((prev, curr) => prev.totalSpent + curr.totalSpent);
+  }
 };

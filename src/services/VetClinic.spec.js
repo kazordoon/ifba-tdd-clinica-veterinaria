@@ -23,7 +23,7 @@ describe('VetClinic', () => {
     expect(() => vetClinic.addAnimal(animal)).toThrow(errorMessage);
   });
 
-    it('Deve adicionar uma lista de animais com sucesso', () => {
+  it('Deve adicionar uma lista de animais com sucesso', () => {
     const vetClinic = new VetClinic();
     const animal1 = new Animal('Luck', 'Cachorro', 5);
     const animal2 = new Animal('Mingau', 'Gato', 7);
@@ -34,7 +34,7 @@ describe('VetClinic', () => {
     vetClinic.addAnimals(animals);
 
     expect(vetClinic.animals).toEqual(expect.arrayContaining(animals));
-  })
+  });
 
   it('Deve consultar um animal existente com sucesso', () => {
     const vetClinic = new VetClinic();
@@ -58,5 +58,30 @@ describe('VetClinic', () => {
     expect(() => vetClinic.findAnimalByID('id-nao-existente')).toThrow(
       errorMessage
     );
+  });
+
+  it('Deve calcular o total gasto acumulado de todos os animais', () => {
+    const vetClinic = new VetClinic();
+    const animal1 = new Animal('Luck', 'Cachorro', 5);
+    const animal2 = new Animal('Mingau', 'Gato', 7);
+
+    const appointment1 = new VetAppointment();
+    appointment1.appointmentType = appointment1.appointmentTypes.ROTINA;
+
+    const appointment2 = new VetAppointment();
+    appointment2.appointmentType = appointment2.appointmentTypes.EMERGENCIA;
+
+    animal1.addAppointment(appointment1);
+    animal1.addAppointment(appointment2);
+
+    animal2.addAppointment(appointment1);
+    animal2.addAppointment(appointment2);
+
+    vetClinic.addAnimals([animal1, animal2]);
+
+    const expectedTotalSpent = appointment1.appointmentTypes.ROTINA.price * 2 + appointment1.appointmentTypes.EMERGENCIA.price * 2;
+    const totalSpent = vetClinic.calculateTotalSpent();
+
+    expect(totalSpent).toBe(expectedTotalSpent)
   });
 });
