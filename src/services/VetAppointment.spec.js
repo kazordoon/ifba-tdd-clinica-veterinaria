@@ -6,7 +6,9 @@ describe('VetAppointment', () => {
     const expectedErrorMessage = 'Invalid appointment';
     const invalidAppointment = { name: 'Invalid' };
 
-    expect(() => new VetAppointment(invalidAppointment)).toThrow(expectedErrorMessage);
+    expect(() => new VetAppointment(invalidAppointment)).toThrow(
+      expectedErrorMessage
+    );
   });
 
   it('Deve definir corretamente o tipo de atendimento caso tente inserir um tipo de atendimento válido', () => {

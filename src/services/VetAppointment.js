@@ -1,6 +1,6 @@
 module.exports = class VetAppointment {
   #appointmentType;
-  #loyaltyDiscountPercentage = 0.10; // 10%
+  #loyaltyDiscountPercentage = 0.1; // 10%
   #totalValue = 0.0;
   #hasTheDiscountBeenApplied = false;
   static types = Object.freeze({
@@ -24,7 +24,8 @@ module.exports = class VetAppointment {
   set appointmentType(appointmentType) {
     let isAValidAppointmentType = Object.values(VetAppointment.types).some(
       (existentAppointmentType) =>
-        appointmentType?.name === existentAppointmentType.name && appointmentType?.price === existentAppointmentType.price
+        appointmentType?.name === existentAppointmentType.name &&
+        appointmentType?.price === existentAppointmentType.price
     );
 
     if (!isAValidAppointmentType) throw new Error('Invalid appointment');
