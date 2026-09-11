@@ -79,9 +79,41 @@ describe('VetClinic', () => {
 
     vetClinic.addAnimals([animal1, animal2]);
 
-    const expectedTotalSpent = appointment1.appointmentTypes.ROTINA.price * 2 + appointment1.appointmentTypes.EMERGENCIA.price * 2;
+    const expectedTotalSpent =
+      appointment1.appointmentTypes.ROTINA.price * 2 +
+      appointment1.appointmentTypes.EMERGENCIA.price * 2;
     const totalSpent = vetClinic.calculateTotalSpent();
 
-    expect(totalSpent).toBe(expectedTotalSpent)
+    expect(totalSpent).toBe(expectedTotalSpent);
+  });
+
+  it('Deve filtrar apenas os animais que tiverem o total gasto acima de determinado valor', () => {
+    const vetClinic = new VetClinic();
+    const animal1 = new Animal('Luck', 'Cachorro', 5);
+    const animal2 = new Animal('Mingau', 'Gato', 7);
+    const animal3 = new Animal('Crusoé', 'Lagarto', 1);
+
+    const appointment1 = new VetAppointment();
+    appointment1.appointmentType = appointment1.appointmentTypes.ROTINA;
+
+    const appointment2 = new VetAppointment();
+    appointment2.appointmentType = appointment2.appointmentTypes.EMERGENCIA;
+
+    animal1.addAppointment(appointment1);
+    animal1.addAppointment(appointment2);
+
+    animal2.addAppointment(appointment1);
+    animal2.addAppointment(appointment2);
+
+    animal3.addAppointment(appointment2);
+
+    vetClinic.addAnimals([animal1, animal2, animal3]);
+
+    const expectedAnimals = vetClinic.findAnimalsWithTotalSpentAbove(
+      appointment2.appointmentTypes.EMERGENCIA.price
+    );
+
+    expect(expectedAnimals).toEqual(expect.arrayContaining([animal1, animal2]));
+    expect(expectedAnimals).not.toEqual(expect.arrayContaining([animal3]));
   });
 });

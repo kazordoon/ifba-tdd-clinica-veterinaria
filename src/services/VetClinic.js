@@ -29,4 +29,8 @@ module.exports = class VetClinic {
   calculateTotalSpent() {
     return this.#animals.reduce((prev, curr) => prev.totalSpent + curr.totalSpent);
   }
+
+  findAnimalsWithTotalSpentAbove(value) {
+    return this.#animals.filter((animal) => animal.totalSpent > value);
+  }
 };
