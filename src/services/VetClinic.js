@@ -37,4 +37,8 @@ module.exports = class VetClinic {
   sortAnimalsByTotalSpent() {
     this.#animals = this.#animals.sort((a, b) => b.totalSpent - a.totalSpent);
   }
+
+  removeAnimalsWithoutAppointments() {
+    this.#animals = this.#animals.filter((animal) => animal.appointments.length > 0);
+  }
 };

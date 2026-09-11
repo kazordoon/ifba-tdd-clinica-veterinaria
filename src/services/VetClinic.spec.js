@@ -150,4 +150,21 @@ describe('VetClinic', () => {
     expect(vetClinic.animals[1]).toEqual(randomAnimal);
     expect(vetClinic.animals[2]).toEqual(animalWithLessTotalSpent);
   });
+
+  it('Deve remover animais sem atendimentos registrados', () => {
+    const vetClinic = new VetClinic();
+    const animalWithAppointment = new Animal('Luck', 'Cachorro', 5);
+    const animalWithoutAppointment = new Animal('Crusoé', 'Lagarto', 1);
+
+    const appointment = new VetAppointment();
+    appointment.appointmentType = appointment.appointmentTypes.ROTINA;
+
+    animalWithAppointment.addAppointment(appointment);
+
+    vetClinic.addAnimals([animalWithAppointment, animalWithoutAppointment]);
+
+    vetClinic.removeAnimalsWithoutAppointments();
+
+    expect(vetClinic.animals).not.toEqual(expect.arrayContaining([animalWithoutAppointment]));
+  });
 });
