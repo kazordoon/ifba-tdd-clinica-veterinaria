@@ -18,8 +18,16 @@ module.exports = class VetClinic {
     animals.forEach((animal) => this.addAnimal(animal));
   }
 
-  findAnimalByID(animalID) {
-    const foundAnimal = this.#animals.find((animal) => animal.id === animalID);
+  findAnimalByID(id) {
+    const foundAnimal = this.#animals.find((animal) => animal.id === id);
+
+    if (!foundAnimal) throw new Error('Animal not found.');
+
+    return foundAnimal;
+  }
+
+  findAnimalByName(name) {
+    const foundAnimal = this.#animals.find((animal) => animal.name === name);
 
     if (!foundAnimal) throw new Error('Animal not found.');
 
@@ -27,7 +35,9 @@ module.exports = class VetClinic {
   }
 
   calculateTotalSpent() {
-    return this.#animals.reduce((prev, curr) => prev.totalSpent + curr.totalSpent);
+    return this.#animals.reduce(
+      (prev, curr) => prev.totalSpent + curr.totalSpent
+    );
   }
 
   findAnimalsWithTotalSpentAbove(value) {
@@ -39,6 +49,8 @@ module.exports = class VetClinic {
   }
 
   removeAnimalsWithoutAppointments() {
-    this.#animals = this.#animals.filter((animal) => animal.appointments.length > 0);
+    this.#animals = this.#animals.filter(
+      (animal) => animal.appointments.length > 0
+    );
   }
 };

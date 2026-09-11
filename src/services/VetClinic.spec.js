@@ -36,7 +36,7 @@ describe('VetClinic', () => {
     expect(vetClinic.animals).toEqual(expect.arrayContaining(animals));
   });
 
-  it('Deve consultar um animal existente com sucesso', () => {
+  it('Deve consultar um animal existente pelo ID com sucesso', () => {
     const vetClinic = new VetClinic();
     const animal = new Animal('Luck', 'Cachorro', 5);
 
@@ -47,7 +47,7 @@ describe('VetClinic', () => {
     expect(foundAnimal.id).toBe(animal.id);
   });
 
-  it('Deve gerar um erro caso um animal não existente seja buscado', () => {
+  it('Deve gerar um erro caso um animal com determinado ID não exista', () => {
     const vetClinic = new VetClinic();
     const animal = new Animal('Luck', 'Cachorro', 5);
 
@@ -56,6 +56,30 @@ describe('VetClinic', () => {
     const errorMessage = 'Animal not found.';
 
     expect(() => vetClinic.findAnimalByID('id-nao-existente')).toThrow(
+      errorMessage
+    );
+  });
+
+  it('Deve consultar um animal existente pelo nome com sucesso', () => {
+    const vetClinic = new VetClinic();
+    const animal = new Animal('Luck', 'Cachorro', 5);
+
+    vetClinic.addAnimal(animal);
+
+    const foundAnimal = vetClinic.findAnimalByName(animal.name);
+
+    expect(foundAnimal.name).toBe(animal.name);
+  });
+
+  it('Deve gerar um erro caso um animal com determinado nome não exista', () => {
+    const vetClinic = new VetClinic();
+    const animal = new Animal('Luck', 'Cachorro', 5);
+
+    vetClinic.addAnimal(animal);
+
+    const errorMessage = 'Animal not found.';
+
+    expect(() => vetClinic.findAnimalByName('nome-nao-existente')).toThrow(
       errorMessage
     );
   });
@@ -165,6 +189,8 @@ describe('VetClinic', () => {
 
     vetClinic.removeAnimalsWithoutAppointments();
 
-    expect(vetClinic.animals).not.toEqual(expect.arrayContaining([animalWithoutAppointment]));
+    expect(vetClinic.animals).not.toEqual(
+      expect.arrayContaining([animalWithoutAppointment])
+    );
   });
 });
