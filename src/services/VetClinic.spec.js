@@ -116,4 +116,38 @@ describe('VetClinic', () => {
     expect(expectedAnimals).toEqual(expect.arrayContaining([animal1, animal2]));
     expect(expectedAnimals).not.toEqual(expect.arrayContaining([animal3]));
   });
+
+  it('Deve ordenar a lista de animais pelo total gasto de forma decrescente', () => {
+    const vetClinic = new VetClinic();
+    const animalWithMostTotalSpent = new Animal('Luck', 'Cachorro', 5);
+    const animalWithLessTotalSpent = new Animal('Crusoé', 'Lagarto', 1);
+    const randomAnimal = new Animal('Mingau', 'Gato', 7);
+
+    const appointment1 = new VetAppointment();
+    appointment1.appointmentType = appointment1.appointmentTypes.ROTINA;
+
+    const appointment2 = new VetAppointment();
+    appointment2.appointmentType = appointment2.appointmentTypes.EMERGENCIA;
+
+    animalWithMostTotalSpent.addAppointment(appointment1);
+    animalWithMostTotalSpent.addAppointment(appointment2);
+    animalWithMostTotalSpent.addAppointment(appointment2);
+
+    animalWithLessTotalSpent.addAppointment(appointment1);
+
+    randomAnimal.addAppointment(appointment2);
+    randomAnimal.addAppointment(appointment2);
+
+    vetClinic.addAnimals([
+      animalWithMostTotalSpent,
+      animalWithLessTotalSpent,
+      randomAnimal
+    ]);
+
+    vetClinic.sortAnimalsByTotalSpent();
+
+    expect(vetClinic.animals[0]).toEqual(animalWithMostTotalSpent);
+    expect(vetClinic.animals[1]).toEqual(randomAnimal);
+    expect(vetClinic.animals[2]).toEqual(animalWithLessTotalSpent);
+  });
 });

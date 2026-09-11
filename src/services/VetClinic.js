@@ -33,4 +33,8 @@ module.exports = class VetClinic {
   findAnimalsWithTotalSpentAbove(value) {
     return this.#animals.filter((animal) => animal.totalSpent > value);
   }
+
+  sortAnimalsByTotalSpent() {
+    this.#animals = this.#animals.sort((a, b) => b.totalSpent - a.totalSpent);
+  }
 };
