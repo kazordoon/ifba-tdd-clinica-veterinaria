@@ -9,6 +9,10 @@ module.exports = class VetAppointment {
     EMERGENCIA: { name: 'Consulta de emergência', price: 250.0 }
   });
 
+  constructor(appointmentType) {
+    this.appointmentType = appointmentType;
+  }
+
   get totalValue() {
     return this.#totalValue;
   }

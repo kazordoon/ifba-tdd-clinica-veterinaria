@@ -89,11 +89,8 @@ describe('VetClinic', () => {
     const animal1 = new Animal('Luck', 'Cachorro', 5);
     const animal2 = new Animal('Mingau', 'Gato', 7);
 
-    const appointment1 = new VetAppointment();
-    appointment1.appointmentType = VetAppointment.types.ROTINA;
-
-    const appointment2 = new VetAppointment();
-    appointment2.appointmentType = VetAppointment.types.EMERGENCIA;
+    const appointment1 = new VetAppointment(VetAppointment.types.ROTINA);
+    const appointment2 = new VetAppointment(VetAppointment.types.EMERGENCIA);
 
     animal1.addAppointment(appointment1);
     animal1.addAppointment(appointment2);
@@ -117,11 +114,8 @@ describe('VetClinic', () => {
     const animal2 = new Animal('Mingau', 'Gato', 7);
     const animal3 = new Animal('Crusoé', 'Lagarto', 1);
 
-    const appointment1 = new VetAppointment();
-    appointment1.appointmentType = VetAppointment.types.ROTINA;
-
-    const appointment2 = new VetAppointment();
-    appointment2.appointmentType = VetAppointment.types.EMERGENCIA;
+    const appointment1 = new VetAppointment(VetAppointment.types.ROTINA);
+    const appointment2 = new VetAppointment(VetAppointment.types.EMERGENCIA);
 
     animal1.addAppointment(appointment1);
     animal1.addAppointment(appointment2);
@@ -147,11 +141,9 @@ describe('VetClinic', () => {
     const animalWithLessTotalSpent = new Animal('Crusoé', 'Lagarto', 1);
     const randomAnimal = new Animal('Mingau', 'Gato', 7);
 
-    const appointment1 = new VetAppointment();
-    appointment1.appointmentType = VetAppointment.types.ROTINA;
+    const appointment1 = new VetAppointment(VetAppointment.types.ROTINA);
 
-    const appointment2 = new VetAppointment();
-    appointment2.appointmentType = VetAppointment.types.EMERGENCIA;
+    const appointment2 = new VetAppointment(VetAppointment.types.EMERGENCIA);
 
     animalWithMostTotalSpent.addAppointment(appointment1);
     animalWithMostTotalSpent.addAppointment(appointment2);
@@ -180,8 +172,7 @@ describe('VetClinic', () => {
     const animalWithAppointment = new Animal('Luck', 'Cachorro', 5);
     const animalWithoutAppointment = new Animal('Crusoé', 'Lagarto', 1);
 
-    const appointment = new VetAppointment();
-    appointment.appointmentType = VetAppointment.types.ROTINA;
+    const appointment = new VetAppointment(VetAppointment.types.ROTINA);
 
     animalWithAppointment.addAppointment(appointment);
 
