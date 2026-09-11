@@ -6,6 +6,11 @@ module.exports = class VetClinic {
   }
 
   addAnimal(animal) {
+    const animalAlreadyAdded = this.#animals.some(
+      (existentAnimal) => animal.id === existentAnimal.id
+    );
+    if (animalAlreadyAdded) throw new Error('Animal already added.');
+
     this.animals.push(animal);
   }
 
