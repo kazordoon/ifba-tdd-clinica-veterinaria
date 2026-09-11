@@ -1,4 +1,5 @@
 module.exports = class Animal {
+  #id;
   #totalSpent = 0.0;
   #appointments = [];
   name = '';
@@ -6,9 +7,14 @@ module.exports = class Animal {
   age = 1;
 
   constructor(name, species, age) {
+    this.#id = crypto.randomUUID();
     this.name = name;
     this.species = species;
     this.age = age;
+  }
+
+  get id() {
+    return this.#id;
   }
 
   get totalSpent() {
