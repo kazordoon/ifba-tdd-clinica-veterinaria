@@ -90,10 +90,10 @@ describe('VetClinic', () => {
     const animal2 = new Animal('Mingau', 'Gato', 7);
 
     const appointment1 = new VetAppointment();
-    appointment1.appointmentType = appointment1.appointmentTypes.ROTINA;
+    appointment1.appointmentType = VetAppointment.types.ROTINA;
 
     const appointment2 = new VetAppointment();
-    appointment2.appointmentType = appointment2.appointmentTypes.EMERGENCIA;
+    appointment2.appointmentType = VetAppointment.types.EMERGENCIA;
 
     animal1.addAppointment(appointment1);
     animal1.addAppointment(appointment2);
@@ -104,8 +104,8 @@ describe('VetClinic', () => {
     vetClinic.addAnimals([animal1, animal2]);
 
     const expectedTotalSpent =
-      appointment1.appointmentTypes.ROTINA.price * 2 +
-      appointment1.appointmentTypes.EMERGENCIA.price * 2;
+      VetAppointment.types.ROTINA.price * 2 +
+      VetAppointment.types.EMERGENCIA.price * 2;
     const totalSpent = vetClinic.calculateTotalSpent();
 
     expect(totalSpent).toBe(expectedTotalSpent);
@@ -118,10 +118,10 @@ describe('VetClinic', () => {
     const animal3 = new Animal('Crusoé', 'Lagarto', 1);
 
     const appointment1 = new VetAppointment();
-    appointment1.appointmentType = appointment1.appointmentTypes.ROTINA;
+    appointment1.appointmentType = VetAppointment.types.ROTINA;
 
     const appointment2 = new VetAppointment();
-    appointment2.appointmentType = appointment2.appointmentTypes.EMERGENCIA;
+    appointment2.appointmentType = VetAppointment.types.EMERGENCIA;
 
     animal1.addAppointment(appointment1);
     animal1.addAppointment(appointment2);
@@ -134,7 +134,7 @@ describe('VetClinic', () => {
     vetClinic.addAnimals([animal1, animal2, animal3]);
 
     const expectedAnimals = vetClinic.findAnimalsWithTotalSpentAbove(
-      appointment2.appointmentTypes.EMERGENCIA.price
+      VetAppointment.types.EMERGENCIA.price
     );
 
     expect(expectedAnimals).toEqual(expect.arrayContaining([animal1, animal2]));
@@ -148,10 +148,10 @@ describe('VetClinic', () => {
     const randomAnimal = new Animal('Mingau', 'Gato', 7);
 
     const appointment1 = new VetAppointment();
-    appointment1.appointmentType = appointment1.appointmentTypes.ROTINA;
+    appointment1.appointmentType = VetAppointment.types.ROTINA;
 
     const appointment2 = new VetAppointment();
-    appointment2.appointmentType = appointment2.appointmentTypes.EMERGENCIA;
+    appointment2.appointmentType = VetAppointment.types.EMERGENCIA;
 
     animalWithMostTotalSpent.addAppointment(appointment1);
     animalWithMostTotalSpent.addAppointment(appointment2);
@@ -181,7 +181,7 @@ describe('VetClinic', () => {
     const animalWithoutAppointment = new Animal('Crusoé', 'Lagarto', 1);
 
     const appointment = new VetAppointment();
-    appointment.appointmentType = appointment.appointmentTypes.ROTINA;
+    appointment.appointmentType = VetAppointment.types.ROTINA;
 
     animalWithAppointment.addAppointment(appointment);
 

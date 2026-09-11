@@ -6,15 +6,15 @@ describe('Animal', () => {
     const animal = new Animal('Luck', 'Cachorro', 5);
 
     const appointment1 = new VetAppointment();
-    appointment1.appointmentType = appointment1.appointmentTypes.ROTINA;
+    appointment1.appointmentType = VetAppointment.types.ROTINA;
 
-    const { appointmentTypes } = appointment1;
+    const { types: appointmentTypes } = VetAppointment;
 
     const appointment2 = new VetAppointment();
-    appointment2.appointmentType = appointment2.appointmentTypes.URGENCIA;
+    appointment2.appointmentType = VetAppointment.types.URGENCIA;
 
     const appointment3 = new VetAppointment();
-    appointment3.appointmentType = appointment3.appointmentTypes.EMERGENCIA;
+    appointment3.appointmentType = VetAppointment.types.EMERGENCIA;
 
     const expectedTotalSpent = appointmentTypes.ROTINA.price + appointmentTypes.URGENCIA.price + appointmentTypes.EMERGENCIA.price;
 
@@ -29,7 +29,7 @@ describe('Animal', () => {
     const animal = new Animal('Luck', 'Cachorro', 5);
 
     const appointment = new VetAppointment();
-    appointment.appointmentType = appointment.appointmentTypes.ROTINA;
+    appointment.appointmentType = VetAppointment.types.ROTINA;
 
     animal.addAppointment(appointment);
 
@@ -39,7 +39,7 @@ describe('Animal', () => {
     it('Deve adicionar 10% de desconto caso o animal tenha pelo menos 5 atendimentos anteriores', () => {
     const animal = new Animal('Luck', 'Cachorro', 5);
     const appointment = new VetAppointment();
-    appointment.appointmentType = appointment.appointmentTypes.ROTINA;
+    appointment.appointmentType = VetAppointment.types.ROTINA;
 
     animal.addAppointment(appointment);
     animal.addAppointment(appointment);
@@ -48,10 +48,10 @@ describe('Animal', () => {
     animal.addAppointment(appointment);
 
     const sixthAppointment = new VetAppointment()
-    sixthAppointment.appointmentType = appointment.appointmentTypes.ROTINA;
+    sixthAppointment.appointmentType = VetAppointment.types.ROTINA;
     animal.addAppointment(sixthAppointment);
 
-    const expectedValueWithDiscount = appointment.appointmentTypes.ROTINA.price * 0.9;
+    const expectedValueWithDiscount = VetAppointment.types.ROTINA.price * 0.9;
 
     expect(sixthAppointment.totalValue).toBe(expectedValueWithDiscount);
   });
@@ -59,7 +59,7 @@ describe('Animal', () => {
     it('Não deve adicionar 10% de desconto caso o animal tenha menos que 5 atendimentos anteriores', () => {
     const animal = new Animal('Luck', 'Cachorro', 5);
     const appointment = new VetAppointment();
-    appointment.appointmentType = appointment.appointmentTypes.ROTINA;
+    appointment.appointmentType = VetAppointment.types.ROTINA;
 
     animal.addAppointment(appointment);
     animal.addAppointment(appointment);
@@ -67,9 +67,9 @@ describe('Animal', () => {
     animal.addAppointment(appointment);
 
     const fifthAppointment = new VetAppointment()
-    fifthAppointment.appointmentType = appointment.appointmentTypes.ROTINA;
+    fifthAppointment.appointmentType = VetAppointment.types.ROTINA;
     animal.addAppointment(fifthAppointment);
 
-    expect(fifthAppointment.totalValue).toBe(appointment.appointmentTypes.ROTINA.price);
+    expect(fifthAppointment.totalValue).toBe(VetAppointment.types.ROTINA.price);
   });
 });
